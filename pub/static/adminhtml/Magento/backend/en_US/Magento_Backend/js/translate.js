@@ -1,0 +1,1 @@
+/var/www/html/magento240/vendor/magento/module-backend/view/adminhtml/web/js/translate.js
