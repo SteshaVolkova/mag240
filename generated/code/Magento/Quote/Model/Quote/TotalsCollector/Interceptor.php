@@ -17,6 +17,19 @@ class Interceptor extends \Magento\Quote\Model\Quote\TotalsCollector implements 
     /**
      * {@inheritdoc}
      */
+    public function collectQuoteTotals(\Magento\Quote\Model\Quote $quote)
+    {
+        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'collectQuoteTotals');
+        if (!$pluginInfo) {
+            return parent::collectQuoteTotals($quote);
+        } else {
+            return $this->___callPlugins('collectQuoteTotals', func_get_args(), $pluginInfo);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function collect(\Magento\Quote\Model\Quote $quote)
     {
         $pluginInfo = $this->pluginList->getNext($this->subjectType, 'collect');
@@ -24,6 +37,19 @@ class Interceptor extends \Magento\Quote\Model\Quote\TotalsCollector implements 
             return parent::collect($quote);
         } else {
             return $this->___callPlugins('collect', func_get_args(), $pluginInfo);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function collectAddressTotals(\Magento\Quote\Model\Quote $quote, \Magento\Quote\Model\Quote\Address $address)
+    {
+        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'collectAddressTotals');
+        if (!$pluginInfo) {
+            return parent::collectAddressTotals($quote, $address);
+        } else {
+            return $this->___callPlugins('collectAddressTotals', func_get_args(), $pluginInfo);
         }
     }
 }

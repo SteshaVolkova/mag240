@@ -39,4 +39,30 @@ class Interceptor extends \Magento\Framework\App\Action\Forward implements \Mage
             return $this->___callPlugins('execute', func_get_args(), $pluginInfo);
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRequest()
+    {
+        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'getRequest');
+        if (!$pluginInfo) {
+            return parent::getRequest();
+        } else {
+            return $this->___callPlugins('getRequest', func_get_args(), $pluginInfo);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getResponse()
+    {
+        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'getResponse');
+        if (!$pluginInfo) {
+            return parent::getResponse();
+        } else {
+            return $this->___callPlugins('getResponse', func_get_args(), $pluginInfo);
+        }
+    }
 }
